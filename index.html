@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Wellcare | 스마트 메디컬 & 웰니스 복지 플랫폼</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- EmailJS SDK (프론트엔드 이메일 전송 라이브러리) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // 발급받으신 Public Key 적용
+            emailjs.init("RKv9r2BuqWGZehMWz");
+        })();
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#115e59',
+                            dark: '#0f172a'
+                        },
+                        accent: {
+                            blue: '#2563eb',
+                            purple: '#7c3aed'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        html { scroll-behavior: smooth; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 118, 110, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-card border-b border-slate-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                    K
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">K-WELLCARE</span>
+                    <span class="text-[10px] text-brand-600 font-semibold tracking-widest uppercase">Medical & Wellness</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600 text-sm">
+                <a href="#about" class="hover:text-brand-600 transition-colors">소개</a>
+                <a href="#services" class="hover:text-brand-600 transition-colors">맞춤복지 솔루션</a>
+                <a href="#tech" class="hover:text-brand-600 transition-colors">첨단장비 & 프로그램</a>
+                <a href="#benefits" class="hover:text-brand-600 transition-colors">도입효과</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="bg-slate-900 hover:bg-brand-600 text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-brand-500/20 flex items-center gap-2">
+                    <span>도입 문의하기</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 hover:text-brand-600 focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4">
+            <a href="#about" class="block text-slate-700 font-medium hover:text-brand-600 py-1">소개</a>
+            <a href="#services" class="block text-slate-700 font-medium hover:text-brand-600 py-1">맞춤복지 솔루션</a>
+            <a href="#tech" class="block text-slate-700 font-medium hover:text-brand-600 py-1">첨단장비 & 프로그램</a>
+            <a href="#benefits" class="block text-slate-700 font-medium hover:text-brand-600 py-1">도입효과</a>
+            <a href="#contact" class="block w-full text-center bg-brand-600 text-white font-semibold py-3 rounded-xl mt-4">도입 문의하기</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 hero-gradient text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-100 text-xs sm:text-sm font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
+                        기업 임직원 & 대학생 특화 의료 복지 플랫폼
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        건강한 라이프스타일,<br/>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-emerald-300 to-cyan-200">
+                            스마트 메디컬 복지
+                        </span>의 시작
+                    </h1>
+
+                    <p class="text-slate-300 text-lg sm:text-xl max-w-2xl font-light leading-relaxed">
+                        K-Wellcare는 프리미엄 의료 네트워크와 독자적인 바이오 헬스케어 프로그램, 최첨단 케어 장비를 결합하여 기업 구성원과 학생들에게 차원이 다른 웰니스 케어를 제공합니다.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                        <a href="#contact" class="bg-gradient-to-r from-brand-500 to-teal-400 hover:from-brand-600 hover:to-teal-500 text-white font-bold px-8 py-4 rounded-xl text-center shadow-lg shadow-brand-500/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>무료 상담 신청</span>
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#tech" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-8 py-4 rounded-xl text-center backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-teal-300"></i>
+                            <span>자사 대표 장비 살펴보기</span>
+                        </a>
+                    </div>
+
+                    <!-- Key Stats -->
+                    <div class="pt-8 grid grid-cols-3 gap-6 border-t border-white/10">
+                        <div>
+                            <div class="text-3xl font-extrabold text-white">150+</div>
+                            <div class="text-xs text-slate-400 mt-1">제휴 의료 기관</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold text-white">98%</div>
+                            <div class="text-xs text-slate-400 mt-1">임직원 서비스 만족도</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold text-white">45K+</div>
+                            <div class="text-xs text-slate-400 mt-1">누적 케어 유저</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Column -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Main Card Glass Graphic -->
+                        <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/20 relative group">
+                            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
+                                 onerror="this.src='https://via.placeholder.com/600x800?text=K-Wellcare+Wellness'" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            
+                            <!-- Floating Info Badge 1 -->
+                            <div class="absolute top-6 right-6 glass-card rounded-2xl p-4 text-slate-900 shadow-xl border border-white/40 animate-float">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-500 font-medium">검증된 전문성</div>
+                                        <div class="text-sm font-bold text-slate-800">대학병원급 메디컬 네트워크</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Info Badge 2 -->
+                            <div class="absolute bottom-6 left-6 right-6 glass-card rounded-2xl p-4 text-slate-900 shadow-xl border border-white/40">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white">
+                                            <i data-lucide="activity" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-slate-500 font-medium">실시간 건강 관리</div>
+                                            <div class="text-sm font-bold text-slate-900">맞춤 웰니스 모니터링</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs bg-brand-100 text-brand-700 px-2.5 py-1 rounded-full font-bold">LIVE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Target Section -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold text-sm tracking-wider uppercase bg-brand-50 px-4 py-1.5 rounded-full border border-brand-100">Tailored Welfare Platform</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">
+                    대상별 최적화된 맞춤형 의료 복지 솔루션
+                </h2>
+                <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                    기업의 생산성 향상과 대학의 캠퍼스 복지 혁신을 위해 차별화된 웰니스 체계를 구축해드립니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Enterprise Card -->
+                <div class="bg-slate-50 rounded-3xl p-8 sm:p-10 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 rounded-2xl overflow-hidden mb-8">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Corporate+Wellness'" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-slate-900 font-bold text-sm flex items-center gap-2">
+                                <i data-lucide="building-2" class="w-4 h-4 text-brand-600"></i>
+                                Corporate Welfare
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-brand-600 transition-colors">
+                            기업 임직원 전용 의료 복지
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            업무 스트레스 증후군, 만성 피로 및 종합 건강검진부터 맞춤형 메디컬 케어까지. 임직원 사기 진작과 기업 생산성 증대를 위한 원스톱 프리미엄 웰니스 복지를 선사합니다.
+                        </p>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                전국 주요 병원·검진센터 제휴 할인 및 우선 예약
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                찾아가는 임직원 정신건강(EAP) 및 멘탈케어
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                사내 웰니스 라운지 K-Wellcare 전문 장비 설치 지원
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-slate-300 text-slate-800 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">
+                        기업용 안내서 요청하기
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- University Card -->
+                <div class="bg-slate-50 rounded-3xl p-8 sm:p-10 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 rounded-2xl overflow-hidden mb-8">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=University+Wellness'" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-slate-900 font-bold text-sm flex items-center gap-2">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-600"></i>
+                                Campus Welfare
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-brand-600 transition-colors">
+                            대학생 & 교직원 복지 케어
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            학업 및 취업 스트레스, 불규칙한 생활 습관으로 지친 대학생들을 위한 청년 특화 헬스케어. 대학 보건소 연계 및 제휴 메디컬 혜택을 통해 청년 건강 안전망을 만듭니다.
+                        </p>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                대학생 전용 안과, 치과, 피부과, 정형외과 우대 서비스
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                청년층 맞춤형 체형·피부·슬리밍 웰니스 케어
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 text-sm font-medium">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                                모바일 앱 연계 자가 진단 및 심리상담 바우처 지원
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-slate-300 text-slate-800 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">
+                        대학 제휴 안내 요청하기
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment & Program Section (타이틀 변경 반영) -->
+    <section id="tech" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background Grid Effect -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#14b8a6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-teal-400 font-bold text-sm tracking-wider uppercase bg-teal-950/80 px-4 py-1.5 rounded-full border border-teal-800">K-Wellcare Signature Lineup</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">
+                    K-Wellcare 자사 첨단 장비 & 프로그램
+                </h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg">
+                    독보적인 메디컬 웰니스 기술력이 집약된 5대 핵심 장비 및 프로그래밍 솔루션을 소개합니다.
+                </p>
+            </div>
+
+            <!-- Equipment Grid (5 Items) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. 포톤광양자테라피 -->
+                <div class="bg-slate-800/80 rounded-3xl overflow-hidden border border-slate-700/80 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between">
+                    <div>
+                        <div class="h-56 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Blood+Purification+Photon'" />
+                            <div class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">핵심 기술: 혈액정화</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-teal-400 text-sm font-semibold mb-2">
+                                <i data-lucide="droplet" class="w-4 h-4 text-red-400"></i>
+                                Photon Therapy & Blood Purification
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">포톤광양자테라피</h3>
+                            <p class="text-xs text-amber-400 font-semibold mb-3">
+                                ★ 정주영 회장, 장쩌민 주석, 브라이언 존슨이 선택한 검증된 테라피
+                            </p>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                생체 파장 광양자 에너지를 이용한 <strong class="text-white font-bold">혈액정화</strong> 및 심부 체온 상승 솔루션. 체내 독소 배출과 면역력 증진에 탁월한 효과를 발휘합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('modal-photon')" class="w-full py-3 bg-slate-700 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>상세 안내 보기</span>
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. 인피니티웨이브 -->
+                <div class="bg-slate-800/80 rounded-3xl overflow-hidden border border-slate-700/80 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between">
+                    <div>
+                        <div class="h-56 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Muscle+Pain+Care'" />
+                            <div class="absolute top-4 left-4 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">근육 & 통증 집중 케어</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-teal-400 text-sm font-semibold mb-2">
+                                <i data-lucide="activity" class="w-4 h-4"></i>
+                                Infinity Wave Muscle Therapy
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">인피니티웨이브</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                특수 파동 에너지를 통해 깊은 층의 근육을 이완시키고, 장시간 작업으로 누적된 <strong class="text-white font-bold">만성 근육 및 통증 케어</strong>를 완화하는 바이오웨이브 장비입니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('modal-infinity')" class="w-full py-3 bg-slate-700 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>상세 안내 보기</span>
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. 슬리미업 (얼굴, 바디 다이어트 키워드 반영) -->
+                <div class="bg-slate-800/80 rounded-3xl overflow-hidden border border-slate-700/80 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between">
+                    <div>
+                        <div class="h-56 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Slimmy+Up'" />
+                            <div class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">얼굴, 바디 다이어트</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-teal-400 text-sm font-semibold mb-2">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                Slimmy Up Body & Face
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">슬리미업</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                <strong class="text-white font-bold">얼굴, 바디 다이어트</strong> 및 셀룰라이트 관리, 탄력 개선을 동시에 돕는 스마트 디바이스로 토탈 슬리밍 케어를 실현합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('modal-slimmy')" class="w-full py-3 bg-slate-700 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>상세 안내 보기</span>
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. 하이리프 (강력한 얼굴 리프팅 키워드 반영) -->
+                <div class="bg-slate-800/80 rounded-3xl overflow-hidden border border-slate-700/80 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between">
+                    <div>
+                        <div class="h-56 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Face+Lifting+Hi-Reef'" />
+                            <div class="absolute top-4 left-4 bg-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-full">강력한 얼굴 리프팅</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-teal-400 text-sm font-semibold mb-2">
+                                <i data-lucide="zap" class="w-4 h-4"></i>
+                                Hi-Reef Face Lifting
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">하이리프</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                <strong class="text-white font-bold">강력한 얼굴 리프팅</strong> 기술을 적용하여 피부 깊은 속 탄력을 끌어올리고 무너진 턱선과 윤곽을 타이트하게 잡아줍니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('modal-hireef')" class="w-full py-3 bg-slate-700 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>상세 안내 보기</span>
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. 퓨어나리 (두피 단어 삭제, 피부 중심 케어 및 이미지 보장) -->
+                <div class="bg-slate-800/80 rounded-3xl overflow-hidden border border-slate-700/80 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between lg:col-span-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 h-full">
+                        <div class="h-56 md:h-full relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552693673-1bf958298933?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Pure+Naree+Skin+Care'" />
+                            <div class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">피부 중심 안티에이징</div>
+                        </div>
+                        <div class="p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2 text-teal-400 text-sm font-semibold mb-2">
+                                    <i data-lucide="sparkle" class="w-4 h-4"></i>
+                                    Pure Naree Skin Care
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3">퓨어나리</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                    <strong class="text-white font-bold">피부 중심의 케어</strong> 시스템으로, 맑고 투명한 페이스 피부 결 정돈과 심층 수분 공급 및 피부장벽 강화를 집중 선사합니다.
+                                </p>
+                            </div>
+                            <button onclick="openModal('modal-pure')" class="w-full py-3 bg-slate-700 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+                                <span>상세 안내 보기</span>
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section (장비 중심 후기 삭제 및 세련된 문구 보완) -->
+    <section id="benefits" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-brand-600 font-bold text-sm tracking-wider uppercase bg-brand-100 px-4 py-1.5 rounded-full">Why K-Wellcare</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight leading-tight">
+                        도입 조직이 체감하는<br/>가장 확실한 변화
+                    </h2>
+                    <p class="text-slate-600 mt-4 leading-relaxed">
+                        복지는 단순히 비용이 아닌 조직의 핵심 경쟁력입니다. K-Wellcare 도입 후 수치로 입증된 효과를 확인해 보세요.
+                    </p>
+
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">조직 몰입도 및 만족도 향상</h4>
+                                <p class="text-sm text-slate-600 mt-1">임직원 및 학생들의 만족도가 평균 34% 증가하였습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">의료 예약 대기시간 70% 단축</h4>
+                                <p class="text-sm text-slate-600 mt-1">전용 하이패스 예약 시스템으로 업무 및 학업 차질 최소화</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-accent-purple flex-shrink-0">
+                                <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">맞춤형 프리미엄 웰니스 라운지 구축</h4>
+                                <p class="text-sm text-slate-600 mt-1">조직 특성에 맞춘 전문 헬스케어 프로그램 및 공간 세팅</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop" 
+                             alt="" 
+                             class="w-full h-[500px] object-cover"
+                             onerror="this.src='https://via.placeholder.com/800x600?text=Dashboard+Image'" />
+                        <div class="absolute inset-0 bg-gradient-to-tr from-slate-900/70 via-transparent to-transparent"></div>
+                        
+                        <div class="absolute bottom-8 left-8 right-8 text-white">
+                            <blockquote class="text-lg font-medium italic mb-4">
+                                "K-Wellcare 도입 이후 구성원들의 건강 관리 수준이 완전히 달라졌으며, 복지 만족도 조사에서 역대 최고 점수를 기록했습니다."
+                            </blockquote>
+                            <div class="text-sm font-bold">— A IT 대기업 인사복지팀 팀장</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Inquiry Section -->
+    <section id="contact" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 rounded-3xl p-8 sm:p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden">
+                <!-- Decorative Circle -->
+                <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">K-Wellcare 도입 상담하기</h2>
+                    <p class="text-slate-300 mt-3 text-sm sm:text-base">
+                        기업 및 대학 맞춤형 복지 프로그램 제안서와 자사 장비 시연 신청을 도와드립니다.
+                    </p>
+                </div>
+
+                <form id="inquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-6 max-w-3xl mx-auto relative z-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">기관 / 기업명 *</label>
+                            <input type="text" name="company_name" required placeholder="예: (주)케이웰케어 / 웰케어대학교" 
+                                   class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">담당자 이름 및 직급 *</label>
+                            <input type="text" name="contact_name" required placeholder="예: 홍길동 팀장" 
+                                   class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">연락처 *</label>
+                            <input type="tel" name="phone_number" required placeholder="010-0000-0000" 
+                                   class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">이메일 *</label>
+                            <input type="email" id="user_email_input" name="user_email" required placeholder="contact@company.com" 
+                                   class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">문의 유형 *</label>
+                        <select name="inquiry_type" class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                            <option value="기업 임직원 의료 복지 도입" class="text-slate-900">기업 임직원 의료 복지 도입</option>
+                            <option value="대학교 & 대학생 복지 제휴" class="text-slate-900">대학교 & 대학생 복지 제휴</option>
+                            <option value="자사 장비 체험 신청" class="text-slate-900">자사 장비(포톤광양자, 인피니티웨이브 등) 체험 신청</option>
+                            <option value="기타 제휴 문의" class="text-slate-900">기타 제휴 문의</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">문의내용</label>
+                        <textarea name="message" rows="4" placeholder="조직 규모, 관심 있는 자사 장비(포톤광양자테라피, 인피니티웨이브, 슬리미업, 하이리프, 퓨어나리) 등을 작성해 주세요." 
+                                  class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"></textarea>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button id="submit-btn" type="submit" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-brand-500 to-teal-400 hover:from-brand-600 hover:to-teal-500 text-white font-extrabold rounded-xl shadow-lg shadow-brand-500/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 mx-auto">
+                            <span>상담 신청 완료하기</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Custom Modal Success Notice -->
+                <div id="form-success-message" class="hidden text-center py-12 space-y-4">
+                    <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">상담 신청이 완료되었습니다!</h3>
+                    <p class="text-slate-300">작성해주신 내용이 성공적으로 전송되었습니다. 24시간 이내에 담당자가 연락드리겠습니다.</p>
+                    <button onclick="resetForm()" class="px-6 py-2 bg-white/20 rounded-lg text-sm text-white hover:bg-white/30">다른 문의 작성하기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-base">K</div>
+                <span class="font-bold text-white tracking-tight">K-WELLCARE</span>
+            </div>
+            <p class="text-xs text-center">
+                &copy; 2026 K-Wellcare Corporation. All rights reserved. 메디컬 & 웰니스 대표 플랫폼
+            </p>
+            <div class="flex gap-6 text-xs">
+                <a href="#" class="hover:text-white">개인정보처리방침</a>
+                <a href="#" class="hover:text-white">이용약관</a>
+                <a href="#" class="hover:text-white">제휴문의</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-photon" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 text-white relative">
+            <button onclick="closeModal('modal-photon')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-xl font-bold text-teal-400 mb-2">포톤광양자테라피 (Photon Therapy)</h3>
+            <p class="text-amber-300 text-xs font-semibold mb-3">
+                정주영 회장, 장쩌민 주석, 브라이언 존슨이 선택한 프리미엄 시술
+            </p>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                광양자 에너지가 체내에 침투하여 <strong class="text-white">혈액정화</strong> 및 순환을 유도하고, 심부 온도를 효율적으로 상승시킵니다.
+            </p>
+            <ul class="text-xs space-y-2 text-slate-400 mb-6 bg-slate-800 p-4 rounded-xl">
+                <li>• 핵심 효과: 혈액정화, 심부 체온 상승, 면역 세포 활성화, 만성 피로 회복</li>
+                <li>• 적용 분야: 기업 사내 웰니스 룸, 프리미엄 헬스케어 센터</li>
+            </ul>
+            <button onclick="closeModal('modal-photon')" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-sm">확인</button>
+        </div>
+    </div>
+
+    <div id="modal-infinity" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 text-white relative">
+            <button onclick="closeModal('modal-infinity')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-xl font-bold text-teal-400 mb-2">인피니티웨이브 (Infinity Wave)</h3>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                파동 고주파 에너지가 딥티슈 근육층까지 도달하여 <strong class="text-white">만성 근육 및 통증 케어</strong>를 전문적으로 수행합니다.
+            </p>
+            <ul class="text-xs space-y-2 text-slate-400 mb-6 bg-slate-800 p-4 rounded-xl">
+                <li>• 핵심 효과: 만성 근육 통증 이완, 관절 주변 혈행 개선, 신경 피로 완화</li>
+                <li>• 특장점: 비침습 자극 없는 파동 기술 지원</li>
+            </ul>
+            <button onclick="closeModal('modal-infinity')" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-sm">확인</button>
+        </div>
+    </div>
+
+    <div id="modal-slimmy" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 text-white relative">
+            <button onclick="closeModal('modal-slimmy')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-xl font-bold text-teal-400 mb-2">슬리미업 (Slimmy Up)</h3>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                얼굴, 바디 다이어트 및 셀룰라이트 분해, 탄력 개선을 동시에 돕는 스마트 디바이스입니다.
+            </p>
+            <ul class="text-xs space-y-2 text-slate-400 mb-6 bg-slate-800 p-4 rounded-xl">
+                <li>• 핵심 효과: 얼굴, 바디 다이어트, 셀룰라이트 분해, 탄력 강화</li>
+            </ul>
+            <button onclick="closeModal('modal-slimmy')" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-sm">확인</button>
+        </div>
+    </div>
+
+    <div id="modal-hireef" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 text-white relative">
+            <button onclick="closeModal('modal-hireef')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-xl font-bold text-teal-400 mb-2">하이리프 (Hi-Reef)</h3>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                강력한 얼굴 리프팅 기술을 바탕으로 피부 깊은 층부터 탄력을 끌어올려 탄탄한 동안 윤곽을 완성합니다.
+            </p>
+            <ul class="text-xs space-y-2 text-slate-400 mb-6 bg-slate-800 p-4 rounded-xl">
+                <li>• 핵심 효과: 강력한 얼굴 리프팅, 콜라겐 재조합, 안면 탄력 복원</li>
+            </ul>
+            <button onclick="closeModal('modal-hireef')" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-sm">확인</button>
+        </div>
+    </div>
+
+    <div id="modal-pure" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 text-white relative">
+            <button onclick="closeModal('modal-pure')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-xl font-bold text-teal-400 mb-2">퓨어나리 (Pure Naree)</h3>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                피부 중심의 집중 케어 솔루션으로, 맑고 깨끗한 페이스 피부 결 정돈과 수분 장벽 강화를 도와줍니다.
+            </p>
+            <ul class="text-xs space-y-2 text-slate-400 mb-6 bg-slate-800 p-4 rounded-xl">
+                <li>• 핵심 효과: 피부 중심 페이스 케어, 수분 장벽 강화, 맑은 안색 개선</li>
+            </ul>
+            <button onclick="closeModal('modal-pure')" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-sm">확인</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Form Submission Handling (EmailJS 전송 로직)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const form = e.target;
+            const formData = new FormData(form);
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "전송 중...";
+
+            const serviceID = "service_osec0521";
+            const templateID = "template_3wl952s";
+
+            const userEmail = formData.get("user_email") || "";
+            const contactName = formData.get("contact_name") || "";
+
+            const templateParams = {
+                to_email: "osec0521@gmail.com",
+                to_name: "K-Wellcare 담당자",
+                
+                company_name: formData.get("company_name") || "",
+                contact_name: contactName,
+                from_name: contactName,
+                phone_number: formData.get("phone_number") || "",
+                user_email: userEmail,
+                from_email: userEmail,
+                email: userEmail,
+                inquiry_type: formData.get("inquiry_type") || "",
+                message: formData.get("message") || "",
+                reply_to: userEmail
+            };
+
+            emailjs.send(serviceID, templateID, templateParams)
+                .then(() => {
+                    showSuccess();
+                })
+                .catch((err) => {
+                    console.warn("send() 방식 전송 실패, sendForm() 방식으로 재시도합니다.", err);
+                    
+                    emailjs.sendForm(serviceID, templateID, form)
+                        .then(() => {
+                            showSuccess();
+                        })
+                        .catch((formErr) => {
+                            console.error("EmailJS 최종 전송 오류:", formErr);
+                            alert("이메일 전송에 실패했습니다. EmailJS 대시보드 설정을 확인해 주세요.");
+                        })
+                        .finally(() => {
+                            submitBtn.disabled = false;
+                            submitBtn.innerText = "상담 신청 완료하기";
+                        });
+                });
+
+            function showSuccess() {
+                document.getElementById('inquiry-form').classList.add('hidden');
+                document.getElementById('form-success-message').classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "상담 신청 완료하기";
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('inquiry-form').reset();
+            document.getElementById('inquiry-form').classList.remove('hidden');
+            document.getElementById('form-success-message').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
