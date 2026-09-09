@@ -1,585 +1,189 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메디컬웰니스 가격표 | 토마톡 추석 현장 특별전</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Noto Sans KR', 'sans-serif'],
-                        mont: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        clinical: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
-                        },
-                        medicalNavy: {
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f8fafc;
-            color: #0f172a;
-            overflow-x: hidden;
-        }
-
-        .studio-shadow {
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 0 10px rgba(0, 0, 0, 0.02);
-        }
-
-        .product-card-border {
-            border: 1px solid #e2e8f0;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-teal-100 selection:text-teal-900">
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: oklch(0.982 0.006 215); }
+  a { color: oklch(0.50 0.07 235); text-decoration: none; }
+  a:hover { color: oklch(0.40 0.08 235); }
+</style>
+</helmet>
+<div style="font-family: Pretendard, 'Apple SD Gothic Neo', sans-serif; color: oklch(0.28 0.02 235); background: oklch(0.982 0.006 215); padding: 0 20px 80px; -webkit-font-smoothing: antialiased;">
 
-    <!-- Top Countdown Event Bar -->
-    <div class="bg-slate-900 text-white text-xs sm:text-sm py-2.5 px-4 text-center border-b border-slate-800 flex flex-wrap items-center justify-center gap-2">
-        <span class="bg-red-500 text-white text-[11px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">현장 단독</span>
-        <span class="text-slate-300 font-medium">토마톡 추석 선물 특별가 이벤트 마감까지</span>
-        <div id="countdown" class="font-mont font-bold text-teal-300 bg-slate-800 px-2.5 py-0.5 rounded border border-slate-700 tracking-wide">
-            00시간 00분 00초
-        </div>
+  <header style="max-width: 1040px; margin: 0 auto; padding: 72px 0 40px; display: flex; flex-direction: column; gap: 22px; border-bottom: 1px solid oklch(0.91 0.008 220);">
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.55 0.03 230); font-weight: 600;">
+      <span style="width: 26px; height: 1px; background: oklch(0.72 0.03 230); display: inline-block;"></span>
+      <span>MEDICAL WELLNESS</span>
     </div>
-
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3.5 shadow-sm">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-teal-800 text-white flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
-                    MW
-                </div>
-                <div>
-                    <h1 class="text-base font-extrabold text-slate-900 tracking-tight leading-none">MEDICAL WELLNESS</h1>
-                    <p class="text-[10px] text-teal-700 font-bold tracking-widest uppercase mt-0.5">Dermatology & Skin Science</p>
-                </div>
-            </div>
-
-            <div class="hidden md:flex items-center space-x-6 text-xs font-semibold text-slate-600">
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-teal-600"></i> 100% 면세점 입점 정품</span>
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-shield text-teal-600"></i> 임상 피부관리 검증</span>
-            </div>
-
-            <div>
-                <button onclick="scrollToProduct()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-lg text-xs transition flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-cart-shopping text-teal-400"></i>
-                    <span>현장 특별가 보기</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full space-y-8">
-
-        <!-- Title Section -->
-        <div class="text-center space-y-3 max-w-3xl mx-auto">
-            <span class="inline-block px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold tracking-wide">
-                MEDICAL WELLNESS SPECIAL CATALOG
-            </span>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-                메디컬 웰니스 공식 라인업 가격표
-            </h2>
-            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                검증된 메디컬 스킨케어 기기를 2026 토마톡 추석 현장 한정 특별 조건으로 제공합니다.
-            </p>
-        </div>
-
-        <!-- Product Tab Selector (5 Slots: 1 Registered, 4 Coming Soon) -->
-        <div class="bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5 text-xs font-semibold">
-            <!-- Active Registered Product -->
-            <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn active bg-slate-900 text-white p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all shadow-sm">
-                <span class="text-[9px] uppercase font-bold text-teal-300 bg-slate-800 px-2 py-0.5 rounded">상품 01 · 등록완료</span>
-                <span class="truncate w-full text-center font-bold">에스테오 프라즈마 수소 미스트</span>
-            </button>
-
-            <!-- Upcoming Product Slot 2 -->
-            <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn bg-slate-50 hover:bg-slate-100 text-slate-400 p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all border border-dashed border-slate-200">
-                <span class="text-[9px] uppercase font-medium text-slate-400">상품 02</span>
-                <span class="truncate w-full text-center text-slate-400">순차 등록 예정</span>
-            </button>
-
-            <!-- Upcoming Product Slot 3 -->
-            <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn bg-slate-50 hover:bg-slate-100 text-slate-400 p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all border border-dashed border-slate-200">
-                <span class="text-[9px] uppercase font-medium text-slate-400">상품 03</span>
-                <span class="truncate w-full text-center text-slate-400">순차 등록 예정</span>
-            </button>
-
-            <!-- Upcoming Product Slot 4 -->
-            <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn bg-slate-50 hover:bg-slate-100 text-slate-400 p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all border border-dashed border-slate-200">
-                <span class="text-[9px] uppercase font-medium text-slate-400">상품 04</span>
-                <span class="truncate w-full text-center text-slate-400">순차 등록 예정</span>
-            </button>
-
-            <!-- Upcoming Product Slot 5 -->
-            <button onclick="switchTab(5)" id="tab-btn-5" class="tab-btn bg-slate-50 hover:bg-slate-100 text-slate-400 p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all border border-dashed border-slate-200 col-span-2 sm:col-span-1">
-                <span class="text-[9px] uppercase font-medium text-slate-400">상품 05</span>
-                <span class="truncate w-full text-center text-slate-400">순차 등록 예정</span>
-            </button>
-        </div>
-
-        <!-- TAB CONTENT 1: Registered Product (에스테오 프라즈마 수소 미스트) -->
-        <div id="product-content-1" class="space-y-8">
-            
-            <!-- Main Product Hero Card -->
-            <div class="bg-white rounded-2xl p-6 lg:p-8 border border-slate-200 studio-shadow relative overflow-hidden">
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-                    
-                    <!-- Left Column: Visual Photo Showcase -->
-                    <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
-                        <div class="relative bg-slate-100 rounded-xl p-8 border border-slate-200 flex flex-col items-center justify-center group min-h-[380px] shadow-inner">
-                            <!-- Clean Badge -->
-                            <div class="absolute top-4 left-4 bg-slate-900 text-white font-bold text-[11px] px-3 py-1 rounded shadow">
-                                추석 선물 추천 1위
-                            </div>
-
-                            <!-- Image Container / SVG Medical Product Graphic -->
-                            <div class="w-48 h-64 relative flex items-center justify-center my-2">
-                                <!-- Mist bottle drawing -->
-                                <svg class="w-full h-full text-slate-800 drop-shadow-md" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="75" y="15" width="50" height="25" rx="3" fill="#334155" />
-                                    <rect x="88" y="40" width="24" height="15" fill="#94a3b8" />
-                                    <!-- Main Body -->
-                                    <rect x="55" y="55" width="90" height="210" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-                                    <!-- Silver Metallic Accent -->
-                                    <rect x="65" y="65" width="70" height="190" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
-                                    <path d="M70 75 Q 80 150 70 235" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-                                    <!-- Plasma LED Display -->
-                                    <rect x="75" y="110" width="50" height="40" rx="6" fill="#0f766e"/>
-                                    <circle cx="100" cy="130" r="10" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="3 2"/>
-                                    <!-- Brand Typography -->
-                                    <text x="100" y="180" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="800" font-family="Montserrat">ESTEO</text>
-                                    <text x="100" y="194" text-anchor="middle" fill="#64748b" font-size="7" font-weight="600" font-family="Montserrat">PLASMA HYDROGEN</text>
-                                </svg>
-                            </div>
-
-                            <p class="text-xs text-slate-500 font-medium text-center mt-2">
-                                <i class="fa-solid fa-camera text-slate-400 mr-1"></i> 에스테오 프라즈마 수소 미스트 스튜디오 컷
-                            </p>
-                        </div>
-
-                        <!-- Celebrity Endorsement Card -->
-                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">셀럽 애정템</span>
-                                <h4 class="text-xs font-bold text-slate-900">연예인 실사용 미스트</h4>
-                            </div>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                동방신기 <strong class="text-slate-900">김재중</strong> · 배우 <strong class="text-slate-900">채정안</strong>이 직접 지칭하고 사용하는 수소 스킨케어 미스트.
-                            </p>
-                        </div>
-
-                        <!-- Duty Free Badges -->
-                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
-                            <span class="text-slate-600 text-xs font-bold block">
-                                <i class="fa-solid fa-building-columns text-teal-700 mr-1"></i> 면세점 공식 입점
-                            </span>
-                            <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-700">
-                                <span class="bg-white px-2.5 py-1 rounded border border-slate-200">신라아이파크면세점</span>
-                                <span class="bg-white px-2.5 py-1 rounded border border-slate-200">롯데면세점</span>
-                                <span class="bg-white px-2.5 py-1 rounded border border-slate-200">현대면세점</span>
-                            </div>
-                            <a href="https://www.shillaipark.com/estore/kr/ko/Domestic-Brand/Skin-Care/Basic-Skin-Care/p/4265197?utm_source=chatgpt.com" target="_blank" class="inline-flex items-center gap-1 text-xs text-teal-700 hover:text-teal-800 font-bold pt-1 underline">
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 신라아이파크면세점 판매가 확인
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Product Info & Pricing -->
-                    <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-                        
-                        <div>
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="bg-teal-50 text-teal-800 border border-teal-200 text-xs font-bold px-2.5 py-0.5 rounded">
-                                    프라즈마 수소 스킨케어
-                                </span>
-                                <span class="bg-red-50 text-red-700 border border-red-200 text-xs font-bold px-2.5 py-0.5 rounded">
-                                    현장 한정 수량
-                                </span>
-                            </div>
-                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                                에스테오 프라즈마 수소 미스트
-                            </h3>
-                            <p class="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
-                                순수 물을 초미세 플라즈마 수소수로 즉각 전환하여 모공 깊숙이 강력한 수분 공급과 항산화케어를 제공합니다.
-                            </p>
-                        </div>
-
-                        <!-- Price Comparison Table / Cards -->
-                        <div class="space-y-2">
-                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider">가격 비교 안내</h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <!-- Internet Market Price -->
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center flex flex-col justify-between">
-                                    <span class="text-xs text-slate-500 font-medium">시중 인터넷가</span>
-                                    <div class="my-1.5">
-                                        <span class="text-base font-bold text-slate-400 line-through">35 ~ 39만원</span>
-                                    </div>
-                                    <span class="text-[10px] text-slate-400">온라인 정가</span>
-                                </div>
-
-                                <!-- Karrot Market Used Price -->
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center flex flex-col justify-between">
-                                    <span class="text-xs text-slate-500 font-medium">당근 중고 시세</span>
-                                    <div class="my-1.5">
-                                        <span class="text-lg font-bold text-slate-700">30만원</span>
-                                    </div>
-                                    <span class="text-[10px] text-slate-500">중고 형성 가격</span>
-                                </div>
-
-                                <!-- Special Offer Price (Highlighted) -->
-                                <div class="bg-teal-50/60 p-4 rounded-xl border-2 border-teal-600 text-center flex flex-col justify-between relative shadow-sm">
-                                    <div class="absolute -top-2.5 right-3 bg-teal-700 text-white text-[9px] font-extrabold px-2 py-0.5 rounded uppercase">
-                                        토마톡 한정가
-                                    </div>
-                                    <span class="text-xs text-teal-900 font-bold">추석 선물 특별가</span>
-                                    <div class="my-1">
-                                        <span class="text-2xl font-black text-teal-800 font-mont">28만원</span>
-                                    </div>
-                                    <div class="bg-white rounded border border-teal-200 p-1 text-[11px] text-teal-900 font-bold">
-                                        현금 <span class="text-teal-700 font-black">14만원</span> + TOTT <span class="text-teal-700 font-black">1,000개</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Why you MUST Buy Section -->
-                        <div class="bg-slate-900 text-white rounded-xl p-5 space-y-3">
-                            <h4 class="text-xs font-bold text-teal-300 flex items-center gap-1.5 uppercase tracking-wide">
-                                <i class="fa-solid fa-circle-check"></i>
-                                오늘 현장에서 무조건 구매해야 하는 이유
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                                <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
-                                    <div class="font-bold text-teal-300 mb-1">1. 당근에 팔아도 시세 차익!</div>
-                                    <p class="text-slate-300 text-[11px] leading-relaxed">
-                                        당근 중고가(30만원) 대비 현금 14만원 결제로 구매 즉시 확실한 가치 확보.
-                                    </p>
-                                </div>
-
-                                <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
-                                    <div class="font-bold text-amber-300 mb-1">2. 최고급 추석 선물 추천</div>
-                                    <p class="text-slate-300 text-[11px] leading-relaxed">
-                                        면세점 공식 입점 패키지 + 셀럽 사용 검증으로 선물 만족도 최상.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Order Calculator & Action -->
-                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-4">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div>
-                                    <span class="text-xs text-slate-500 font-medium">수량 선택</span>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <button onclick="updateQty(-1)" class="w-8 h-8 rounded bg-white hover:bg-slate-100 text-slate-800 font-bold flex items-center justify-center border border-slate-300 shadow-sm">-</button>
-                                        <span id="qty-display" class="font-mont font-bold text-base text-slate-900 w-8 text-center">1</span>
-                                        <button onclick="updateQty(1)" class="w-8 h-8 rounded bg-white hover:bg-slate-100 text-slate-800 font-bold flex items-center justify-center border border-slate-300 shadow-sm">+</button>
-                                        <span class="text-xs text-slate-500 ml-1">개</span>
-                                    </div>
-                                </div>
-
-                                <div class="text-right">
-                                    <span class="text-xs text-slate-500 font-medium">총 합계 금액</span>
-                                    <div class="text-base sm:text-lg font-black text-slate-900 mt-0.5">
-                                        현금 <span id="calc-cash" class="text-teal-700">14</span>만원 + TOTT <span id="calc-tott" class="text-teal-700">1,000</span>개
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button onclick="openModal()" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-extrabold py-3.5 px-6 rounded-lg text-sm transition shadow flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-file-signature"></i>
-                                <span>오늘 현장 구매 예약 신청</span>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Clinical Feature Gallery Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div class="bg-white p-5 rounded-xl border border-slate-200 studio-shadow space-y-2">
-                    <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold">
-                        <i class="fa-solid fa-flask"></i>
-                    </div>
-                    <h5 class="font-bold text-slate-900 text-sm">플라즈마 수소 모듈</h5>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        일반 생수를 수소 이온수로 즉시 정화 및 생성하여 모공에 수분을 공급합니다.
-                    </p>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-slate-200 studio-shadow space-y-2">
-                    <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center text-lg font-bold">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h5 class="font-bold text-slate-900 text-sm">면세점 품질 보증</h5>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        주요 면세점 엄격한 수입 검수를 마친 프리미엄 패키지와 본체 품질 정품 보증.
-                    </p>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-slate-200 studio-shadow space-y-2">
-                    <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-lg font-bold">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <h5 class="font-bold text-slate-900 text-sm">TOTT 복합 결제 지원</h5>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        토마톡 추석 행사 현장 구매자를 위한 TOTT 토큰 사용 혜택 적용.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- TAB CONTENT 2 to 5: Placeholder for upcoming products -->
-        <div id="product-content-placeholder" class="hidden bg-white rounded-2xl p-12 text-center border border-slate-200 studio-shadow space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center text-xl mx-auto">
-                <i class="fa-solid fa-box-archive"></i>
-            </div>
-            <h3 class="text-xl font-bold text-slate-800" id="placeholder-title">상품 02 - 준비 중</h3>
-            <p class="text-slate-500 text-xs max-w-md mx-auto">
-                메디컬 웰니스 카탈로그의 다음 라인업 제품이 순차적으로 등록될 예정입니다.
-            </p>
-            <button onclick="switchTab(1)" class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
-                <i class="fa-solid fa-arrow-left"></i> 01번 에스테오 미스트 보기
-            </button>
-        </div>
-
-    </main>
-
-    <!-- Purchase Modal -->
-    <div id="order-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white border border-slate-200 w-full max-w-md rounded-2xl p-6 relative shadow-2xl space-y-5">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold text-teal-700 uppercase tracking-wider">토마톡 추석 현장 수령</span>
-                <h3 class="text-lg font-bold text-slate-900">현장 구매 예약 신청</h3>
-            </div>
-
-            <!-- Order Summary Pill -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1.5 text-xs">
-                <div class="flex justify-between text-slate-600">
-                    <span>선택 상품:</span>
-                    <strong class="text-slate-900">에스테오 프라즈마 수소 미스트</strong>
-                </div>
-                <div class="flex justify-between text-slate-600">
-                    <span>예약 수량:</span>
-                    <strong id="modal-qty" class="text-slate-900">1개</strong>
-                </div>
-                <div class="flex justify-between text-slate-700 border-t border-slate-200 pt-1.5 text-xs font-bold">
-                    <span>최종 결제:</span>
-                    <strong class="text-teal-800">현금 <span id="modal-cash">14</span>만원 + TOTT <span id="modal-tott">1,000</span>개</strong>
-                </div>
-            </div>
-
-            <!-- Simple Form -->
-            <form onsubmit="submitOrder(event)" class="space-y-3 text-xs">
-                <div>
-                    <label class="block text-slate-700 font-medium mb-1">신청자 성함</label>
-                    <input type="text" required placeholder="성함을 입력하세요" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700">
-                </div>
-
-                <div>
-                    <label class="block text-slate-700 font-medium mb-1">연락처</label>
-                    <input type="tel" required placeholder="010-0000-0000" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700">
-                </div>
-
-                <div>
-                    <label class="block text-slate-700 font-medium mb-1">TOTT 수령 계정 / 지갑 주소 (선택)</label>
-                    <input type="text" placeholder="회원 아이디 또는 지갑 주소" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-teal-700">
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 rounded-lg text-xs transition shadow">
-                        예약 신청 등록 완료
-                    </button>
-                </div>
-            </form>
-        </div>
+    <h1 style="font-family: 'Noto Serif KR', serif; font-weight: 600; font-size: 44px; line-height: 1.3; margin: 0; letter-spacing: -0.01em; text-wrap: pretty;">메디컬웰니스 상품 소개 및 가격표</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.8; color: oklch(0.47 0.02 235); max-width: 620px; text-wrap: pretty;">행사 현장에서만 만날 수 있는 두 가지 프리미엄 뷰티 상품입니다. 한정 수량으로 준비되어 있으며, 현금과 TOTT를 함께 사용해 구매하실 수 있습니다.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px;">
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: oklch(0.94 0.02 235); color: oklch(0.40 0.06 235); font-size: 13px; font-weight: 600;">한정 수량 · 소진 시 종료</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: oklch(0.95 0.02 80); color: oklch(0.44 0.06 70); font-size: 13px; font-weight: 600;">현금 + TOTT 결제</span>
     </div>
+  </header>
 
-    <!-- Success Toast Notification -->
-    <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold shadow-xl hidden flex items-center gap-2 text-xs">
-        <i class="fa-solid fa-circle-check text-teal-400"></i>
-        <span id="toast-msg">현장 예약 신청이 완료되었습니다.</span>
-    </div>
+  <section style="max-width: 1040px; margin: 0 auto; padding: 64px 0 0; display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); gap: 48px; align-items: start;">
+    <figure style="margin: 0; border-radius: 6px; overflow: hidden; background: white; box-shadow: 0 1px 2px oklch(0.5 0.03 230 / 0.10), 0 12px 32px oklch(0.5 0.03 230 / 0.08);">
+      <img src="assets/mist.png" alt="에스테오 플라즈마 수소 미스트 홍보물" style="display: block; width: 100%; height: auto;" />
+    </figure>
+    <div style="display: flex; flex-direction: column; gap: 26px; padding-top: 6px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 12px; letter-spacing: 0.2em; font-weight: 700; color: oklch(0.55 0.07 235);">01 &nbsp;PLASMA HYDROGEN MIST</span>
+        <h2 style="font-family: 'Noto Serif KR', serif; font-weight: 600; font-size: 32px; line-height: 1.35; margin: 0; letter-spacing: -0.01em; text-wrap: pretty;">에스테오 플라즈마 수소 미스트</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.8; color: oklch(0.47 0.02 235); text-wrap: pretty;">초미세 수소 입자가 만드는 피부의 차이. 신라아이파크 · 롯데 · 현대 면세점 입점 뷰티 디바이스입니다.</p>
+      </div>
 
-    <!-- Mobile Sticky Purchase Bar -->
-    <div class="md:hidden sticky bottom-0 z-40 bg-white border-t border-slate-200 p-3 flex items-center justify-between gap-3 shadow-lg">
-        <div>
-            <div class="text-[10px] text-slate-500">토마톡 할인가</div>
-            <div class="text-xs font-black text-slate-900">
-                14만원 <span class="text-[10px] text-teal-700 font-bold">+ TOTT 1,000개</span>
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;">
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.62 0.07 235);">·</span>초미세 수소 입자</li>
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.62 0.07 235);">·</span>눈의 피로 케어</li>
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.62 0.07 235);">·</span>피부 미백 케어</li>
+      </ul>
+
+      <div style="background: white; border: 1px solid oklch(0.91 0.012 225); border-radius: 8px; padding: 30px 32px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: oklch(0.55 0.03 230);">특별가</span>
+            <span style="font-family: 'Noto Serif KR', serif; font-size: 46px; font-weight: 700; line-height: 1; color: oklch(0.32 0.05 240);">25<span style="font-size: 26px; font-weight: 600; margin-left: 4px;">만원</span></span>
+          </div>
+          <span style="padding: 8px 14px; border-radius: 4px; background: oklch(0.94 0.025 235); color: oklch(0.38 0.07 240); font-size: 14px; font-weight: 700;">한정 수량 20대</span>
+        </div>
+        <div style="height: 1px; background: oklch(0.93 0.008 225);"></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: oklch(0.55 0.03 230);">결제 구성</span>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+            <span style="font-size: 20px; font-weight: 700; color: oklch(0.30 0.02 235);">현금 15만원</span>
+            <span style="font-size: 18px; color: oklch(0.68 0.02 230);">+</span>
+            <span style="font-size: 20px; font-weight: 700; color: oklch(0.44 0.07 235);">TOTT 1,000개</span>
+          </div>
+        </div>
+        <sc-if value="{{ showReferencePrice }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-wrap: wrap; gap: 22px; padding-top: 4px; border-top: 1px dashed oklch(0.90 0.01 225); padding-top: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; color: oklch(0.60 0.02 230);">면세점 인터넷회원가</span>
+              <span style="font-size: 16px; font-weight: 600; color: oklch(0.52 0.02 235); text-decoration: line-through;">285,973원</span>
             </div>
-        </div>
-        <button onclick="openModal()" class="bg-teal-700 text-white font-bold px-4 py-2 rounded-lg text-xs flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>현장 구매</span>
-        </button>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; color: oklch(0.60 0.02 230);">인터넷가</span>
+              <span style="font-size: 16px; font-weight: 600; color: oklch(0.52 0.02 235); text-decoration: line-through;">35~39만원</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs border-t border-slate-800">
-        <div class="max-w-7xl mx-auto space-y-2">
-            <p class="font-bold text-slate-200">MEDICAL WELLNESS · 토마톡 추석 현장 특별전</p>
-            <p class="text-slate-500 text-[11px]">본 페이지의 조건은 토마톡 행사 현장 참가자 한정 조건입니다.</p>
-            <p class="text-[10px] text-slate-600">© 2026 Medical Wellness. All rights reserved.</p>
+  <section style="max-width: 1040px; margin: 0 auto; padding: 80px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr); gap: 48px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 26px; padding-top: 6px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 12px; letter-spacing: 0.2em; font-weight: 700; color: oklch(0.55 0.06 75);">02 &nbsp;INTENSIVE CELL RECOVERY</span>
+        <h2 style="font-family: 'Noto Serif KR', serif; font-weight: 600; font-size: 32px; line-height: 1.35; margin: 0; letter-spacing: -0.01em; text-wrap: pretty;">지엘 인텐시브 셀 리커버리 캐비어 크림</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.8; color: oklch(0.47 0.02 235); text-wrap: pretty;">캐비어추출물과 인체지방질세포배양액을 담은 미백 · 주름개선 2중 기능성 크림. 2025 APEC 경주 공식 초대 기업 XIEL의 프리미엄 라인입니다.</p>
+      </div>
+
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;">
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.66 0.06 75);">·</span>캐비어추출물 + 인체지방질세포배양액</li>
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.66 0.06 75);">·</span>미백 × 주름개선 2중 기능성</li>
+        <li style="display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.7; color: oklch(0.38 0.02 235);"><span style="color: oklch(0.66 0.06 75);">·</span>세라마이드 피부장벽 · 고영양 집중 리커버리</li>
+      </ul>
+
+      <div style="background: white; border: 1px solid oklch(0.91 0.012 80); border-radius: 8px; padding: 30px 32px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: oklch(0.55 0.03 230);">특별가</span>
+            <span style="font-family: 'Noto Serif KR', serif; font-size: 46px; font-weight: 700; line-height: 1; color: oklch(0.36 0.05 70);">10<span style="font-size: 26px; font-weight: 600; margin-left: 4px;">만원</span></span>
+          </div>
+          <span style="padding: 8px 14px; border-radius: 4px; background: oklch(0.95 0.025 80); color: oklch(0.42 0.06 65); font-size: 14px; font-weight: 700;">한정 수량 100개</span>
         </div>
-    </footer>
+        <div style="height: 1px; background: oklch(0.93 0.008 80);"></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: oklch(0.55 0.03 230);">결제 구성</span>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+            <span style="font-size: 20px; font-weight: 700; color: oklch(0.30 0.02 235);">현금 5만원</span>
+            <span style="font-size: 18px; color: oklch(0.70 0.02 80);">+</span>
+            <span style="font-size: 20px; font-weight: 700; color: oklch(0.48 0.07 70);">TOTT 500개</span>
+          </div>
+        </div>
+        <sc-if value="{{ showReferencePrice }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-wrap: wrap; gap: 22px; border-top: 1px dashed oklch(0.90 0.01 80); padding-top: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; color: oklch(0.60 0.02 230);">화해 뷰티 플랫폼</span>
+              <span style="font-size: 16px; font-weight: 600; color: oklch(0.52 0.02 235); text-decoration: line-through;">69만원</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; color: oklch(0.60 0.02 230);">인터넷 최저가</span>
+              <span style="font-size: 16px; font-weight: 600; color: oklch(0.52 0.02 235); text-decoration: line-through;">34만원</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <figure style="margin: 0; border-radius: 6px; overflow: hidden; background: white; box-shadow: 0 1px 2px oklch(0.5 0.03 230 / 0.10), 0 12px 32px oklch(0.5 0.03 230 / 0.08);">
+      <img src="assets/cream.png" alt="지엘 인텐시브 셀 리커버리 캐비어 크림 홍보물" style="display: block; width: 100%; height: auto;" />
+    </figure>
+  </section>
 
-    <script>
-        // State variables
-        let quantity = 1;
-        const unitCash = 14; // 만원
-        const unitTott = 1000; // 개
+  <section style="max-width: 1040px; margin: 96px auto 0; background: white; border: 1px solid oklch(0.91 0.012 225); border-radius: 8px; padding: 56px 56px 60px; display: flex; flex-direction: column; gap: 36px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span style="font-size: 12px; letter-spacing: 0.2em; font-weight: 700; color: oklch(0.55 0.03 230);">03 &nbsp;WHY NOW</span>
+      <h2 style="font-family: 'Noto Serif KR', serif; font-weight: 600; font-size: 30px; line-height: 1.35; margin: 0; letter-spacing: -0.01em;">무조건 구입해야 이유</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
+      <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 24px; border-top: 2px solid oklch(0.72 0.06 235);">
+        <span style="font-size: 20px; font-weight: 700; line-height: 1.5; color: oklch(0.28 0.02 235); text-wrap: pretty;">행사 현장에서 만날 수 있는 가격</span>
+        <span style="font-size: 16px; line-height: 1.8; color: oklch(0.47 0.02 235); text-wrap: pretty;">팔아도 수익이 난다</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 24px; border-top: 2px solid oklch(0.76 0.06 75);">
+        <span style="font-size: 20px; font-weight: 700; line-height: 1.5; color: oklch(0.28 0.02 235); text-wrap: pretty;">누구에게도 후회없을 최고의 선물</span>
+        <span style="font-size: 16px; line-height: 1.8; color: oklch(0.47 0.02 235); text-wrap: pretty;">VIP와 소중한 분들을 위한 선물용으로 강력 추천</span>
+      </div>
+    </div>
+  </section>
 
-        // Tab Switcher Logic
-        function switchTab(tabIndex) {
-            document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
-                if (idx === tabIndex - 1) {
-                    btn.className = "tab-btn active bg-slate-900 text-white p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all shadow-sm";
-                } else {
-                    btn.className = "tab-btn bg-slate-50 hover:bg-slate-100 text-slate-400 p-3 rounded-lg flex flex-col items-center justify-center gap-1 transition-all border border-dashed border-slate-200";
-                }
-            });
+  <section style="max-width: 1040px; margin: 40px auto 0; border: 1px solid oklch(0.91 0.012 225); border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); background: oklch(0.95 0.008 220); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: oklch(0.45 0.02 230);">
+      <div style="padding: 16px 24px;">상품</div>
+      <div style="padding: 16px 24px;">특별가</div>
+      <div style="padding: 16px 24px;">한정 수량</div>
+      <div style="padding: 16px 24px;">결제 구성</div>
+    </div>
+    <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); background: white; border-top: 1px solid oklch(0.93 0.008 225); font-size: 15px; align-items: center;">
+      <div style="padding: 20px 24px; font-weight: 600; text-wrap: pretty;">에스테오 플라즈마 수소 미스트</div>
+      <div style="padding: 20px 24px; font-weight: 700; color: oklch(0.34 0.05 240);">25만원</div>
+      <div style="padding: 20px 24px; color: oklch(0.45 0.02 230);">20대</div>
+      <div style="padding: 20px 24px; color: oklch(0.40 0.02 235); text-wrap: pretty;">현금 15만원 + TOTT 1,000개</div>
+    </div>
+    <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); background: white; border-top: 1px solid oklch(0.93 0.008 225); font-size: 15px; align-items: center;">
+      <div style="padding: 20px 24px; font-weight: 600; text-wrap: pretty;">지엘 인텐시브 셀 리커버리 캐비어 크림</div>
+      <div style="padding: 20px 24px; font-weight: 700; color: oklch(0.38 0.05 70);">10만원</div>
+      <div style="padding: 20px 24px; color: oklch(0.45 0.02 230);">100개</div>
+      <div style="padding: 20px 24px; color: oklch(0.40 0.02 235); text-wrap: pretty;">현금 5만원 + TOTT 500개</div>
+    </div>
+  </section>
 
-            const content1 = document.getElementById('product-content-1');
-            const contentPlaceholder = document.getElementById('product-content-placeholder');
-            const placeholderTitle = document.getElementById('placeholder-title');
+  <footer style="max-width: 1040px; margin: 32px auto 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 13px; color: oklch(0.58 0.02 230);">
+    <span>가격은 행사 기간 한정이며 수량 소진 시 조기 종료될 수 있습니다.</span>
+    <span style="letter-spacing: 0.18em;">MEDICAL WELLNESS</span>
+  </footer>
 
-            if (tabIndex === 1) {
-                content1.classList.remove('hidden');
-                contentPlaceholder.classList.add('hidden');
-            } else {
-                content1.classList.add('hidden');
-                contentPlaceholder.classList.remove('hidden');
-                placeholderTitle.innerText = `상품 0${tabIndex} - 순차 등록 예정`;
-            }
-        }
-
-        // Quantity Update Logic
-        function updateQty(change) {
-            quantity = Math.max(1, quantity + change);
-            document.getElementById('qty-display').innerText = quantity;
-            
-            // Recalculate
-            const totalCash = quantity * unitCash;
-            const totalTott = (quantity * unitTott).toLocaleString();
-
-            document.getElementById('calc-cash').innerText = totalCash;
-            document.getElementById('calc-tott').innerText = totalTott;
-
-            // Modal sync
-            document.getElementById('modal-qty').innerText = `${quantity}개`;
-            document.getElementById('modal-cash').innerText = totalCash;
-            document.getElementById('modal-tott').innerText = totalTott;
-        }
-
-        // Modal Controls
-        function openModal() {
-            document.getElementById('order-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('order-modal').classList.add('hidden');
-        }
-
-        // Order Form Submit Handler
-        function submitOrder(e) {
-            e.preventDefault();
-            closeModal();
-            
-            // Show toast message
-            const toast = document.getElementById('toast');
-            toast.classList.remove('hidden');
-            
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3500);
-        }
-
-        // Smooth Scroll Helper
-        function scrollToProduct() {
-            window.scrollTo({
-                top: 220,
-                behavior: 'smooth'
-            });
-        }
-
-        // Real-time Event Countdown Timer
-        function startCountdown() {
-            const end = new Date();
-            end.setHours(23, 59, 59, 999);
-
-            function update() {
-                const current = new Date();
-                const diff = end - current;
-
-                if (diff <= 0) {
-                    document.getElementById('countdown').innerText = "이벤트 마감";
-                    return;
-                }
-
-                const hrs = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
-                const mins = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-                const secs = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-
-                document.getElementById('countdown').innerText = `${hrs}시간 ${mins}분 ${secs}초`;
-            }
-
-            update();
-            setInterval(update, 1000);
-        }
-
-        // Initialize on Window Load
-        window.onload = function() {
-            startCountdown();
-            updateQty(0);
-        };
-    </script>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showReferencePrice&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showReferencePrice: this.props.showReferencePrice ?? true };
+  }
+}
+</script>
 </body>
 </html>
